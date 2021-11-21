@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreBot", "CoreBot.csproj", "{70DC5928-0733-4A18-89FD-C8C25654C29E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70DC5928-0733-4A18-89FD-C8C25654C29E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70DC5928-0733-4A18-89FD-C8C25654C29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70DC5928-0733-4A18-89FD-C8C25654C29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70DC5928-0733-4A18-89FD-C8C25654C29E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2A4C2C6-DE83-4621-B29E-4D30304D1377}
+	EndGlobalSection
+EndGlobal
