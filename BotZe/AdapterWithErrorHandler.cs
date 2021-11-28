@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
 
-namespace EmptyBotCarlos
+namespace EmptyBotZe
 {
     public class AdapterWithErrorHandler : CloudAdapter
     {

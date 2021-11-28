@@ -3,7 +3,7 @@ using Microsoft.Bot.Builder.AI.Luis;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace EmptyBotCarlos.CognitiveModels
+namespace EmptyBotZe.CognitiveModels
 {
     public class ZeCognitiveModel : IRecognizerConvert
     {

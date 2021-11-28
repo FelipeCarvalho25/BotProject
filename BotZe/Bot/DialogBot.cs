@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace EmptyBotCarlos
+namespace EmptyBotZe
 {
     public class DialogBot<T> : ActivityHandler
         where T : Dialog

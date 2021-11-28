@@ -4,8 +4,8 @@
 // Generated with Bot Builder V4 SDK Template for Visual Studio CoreBot v4.14.0
 
 //using CoreBot.CognitiveModels;
-using EmptyBotCarlos.CognitiveModels;
-using EmptyBotCarlos.Recognizers;
+using EmptyBotZe.CognitiveModels;
+using EmptyBotZe.Recognizers;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Schema;
@@ -17,7 +17,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace EmptyBotCarlos.Dialogs
+namespace EmptyBotZe.Dialogs
 {
     public class MainDialog : ComponentDialog
     {
@@ -60,79 +60,81 @@ namespace EmptyBotCarlos.Dialogs
 
         private async Task<DialogTurnResult> ActStepAsync(WaterfallStepContext stepContext, CancellationToken cancellationToken)
         {
-            if (!_luisRecognizer.IsConfigured)
+            /*if (!_luisRecognizer.IsConfigured)
             {
                 // LUIS is not configured, we just run the BookingDialog path with an empty BookingDetailsInstance.
                 return await stepContext.BeginDialogAsync(nameof(BookingDialog), new BookingDetails(), cancellationToken);
-            }
+            }*/
 
             // Call LUIS and gather any potential booking details. (Note the TurnContext has the response to the prompt.)
-            var luisResult = await _luisRecognizer.RecognizeAsync<ZeognitiveModel>(stepContext.Context, cancellationToken);
+            var luisResult = await _luisRecognizer.RecognizeAsync<ZeCognitiveModel>(stepContext.Context, cancellationToken);
+            var responseMessageText = $"Olá.";
+            var  responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
             switch (luisResult.TopIntent().intent)
             {
-                case ZeCognitiveModel.Intent.Saudacao:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.saudacao:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
                 //Identificar as inteções e fazer as respostas
-                case ZeCognitiveModel.Intent.Chamado:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.chamado:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
 
-                case ZeCognitiveModel.Intent.Incidente:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.incidente:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
 
-                case ZeCognitiveModel.Intent.Problema:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.problema:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
 
-                case ZeCognitiveModel.Intent.Mopp:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.mopp:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
 
-                case ZeCognitiveModel.Intent.Ocorrencia:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.ocorrencia:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
 
-                case ZeCognitiveModel.Intent.Refeicao:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.refeicao:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
 
-                case ZeCognitiveModel.Intent.Tempo:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.tempo:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
 
-                case ZeCognitiveModel.Intent.Abertura:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.abertura:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
 
-                case ZeCognitiveModel.Intent.Prazo:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.prazo:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
 
-                case ZeCognitiveModel.Intent.Saber:
-                    var responseMessageText = $"Olá.";
-                    var responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
+                case ZeCognitiveModel.Intent.saber:
+                    responseMessageText = $"Olá.";
+                    responseMessage = MessageFactory.Text(responseMessageText, responseMessageText, InputHints.IgnoringInput);
                     await stepContext.Context.SendActivityAsync(responseMessage, cancellationToken);
                     break;
 
@@ -152,7 +154,7 @@ namespace EmptyBotCarlos.Dialogs
         {
             //// If the child dialog ("BookingDialog") was cancelled, the user failed to confirm or if the intent wasn't BookFlight
             //// the Result here will be null.
-            if (stepContext.Result is BookingDetails result)
+            /*if (stepContext.Result is BookingDetails result)
             {
             //    // Now we have all the booking details call the booking service.
 
@@ -163,7 +165,7 @@ namespace EmptyBotCarlos.Dialogs
                 var messageText = $"Eu abri seu chamado";
                 var message = MessageFactory.Text(messageText, messageText, InputHints.IgnoringInput);
                 await stepContext.Context.SendActivityAsync(message, cancellationToken);
-            }
+            }*/
 
             // Restart the main dialog with a different message the second time around
             var promptMessage = "Posso te ajudar em mais alguma coisa?";

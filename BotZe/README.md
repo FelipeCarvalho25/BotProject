@@ -1,4 +1,4 @@
-﻿# EmptyBotCarlos
+﻿# EmptyBotZe
 
 Bot Framework v4 empty bot sample.
 
@@ -15,11 +15,11 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
 ## To try this sample
 
-- In a terminal, navigate to `EmptyBotCarlos`
+- In a terminal, navigate to `EmptyBotZe`
 
     ```bash
     # change into project folder
-    cd EmptyBotCarlos
+    cd EmptyBotZe
     ```
 
 - Run the bot from a terminal or from Visual Studio, choose option A or B.
@@ -35,8 +35,8 @@ This bot has been created using [Bot Framework](https://dev.botframework.com), i
 
   - Launch Visual Studio
   - File -> Open -> Project/Solution
-  - Navigate to `EmptyBotCarlos` folder
-  - Select `EmptyBotCarlos.csproj` file
+  - Navigate to `EmptyBotZe` folder
+  - Select `EmptyBotZe.csproj` file
   - Press `F5` to run the project
 
 ## Testing the bot using Bot Framework Emulator
