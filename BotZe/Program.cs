@@ -5,12 +5,13 @@
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace EmptyBotZe
 {
     public class Program
     {
-        public static void Main(string[] args)
+       public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
         }
@@ -19,6 +20,11 @@ namespace EmptyBotZe
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureLogging((logging) =>
+                    {
+                        logging.AddDebug();
+                        logging.AddConsole();
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }
