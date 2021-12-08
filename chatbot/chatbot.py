@@ -32,6 +32,7 @@ class ChatBot:
         ticket_dialog.add_state('Que pena, parece que não consegui te ajudar.\nCerto, escreva com o máximo de detalhes a sua dúvida:')
         ticket_dialog.add_state('Certo, agora informe seu nome:')
         ticket_dialog.add_state('Agora preciso do seu e-mail:')
+        ticket_dialog.add_state('Agora informe seu problema ou solicitação:')
         ticket_dialog.add_state('')
         self.dialogs.add_dialog(ticket_dialog)
 

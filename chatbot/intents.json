@@ -1,6 +1,6 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Olá", "Oi", "Alguém ai?", "Opa", "Oie", "Oii", "Tudo bem?", "Como vai você?"],
+         "patterns": ["Olá", "Oi", "Alguém ai?", "Opa", "Oie", "Oii", "Tudo bem?", "Como vai você?", "Boa noite", "Bom dia", "Boa tarde", "E ai"],
          "responses": ["Olá, como posso ajudar?"],
          "context": [""]
         },
@@ -30,7 +30,7 @@
          "context": [""]
         },
         {"tag": "ticket",
-         "patterns": ["Gostaria de abrir um ticket", "Você pode abrir um ticket", "Quero falar com um humano", "Ticket", "Abrir ticket", "Não consegui", "Não sei fazer isso", "Não sei", "Você não está ajudando"],
+         "patterns": ["Gostaria de abrir um ticket", "Você pode abrir um ticket", "Quero falar com um humano", "Ticket", "Abrir ticket","Abrir um chamado", "Abrir uma solicitação", "Tenho um problema", "Solicito a abertura de um chamado","Preciso abrir um chamado", "Gostaria de abrir um chamado","Quero abrir um chamado", "Chamado", "Abrir chamado", "Abrir um chamado", "Não consegui", "Não sei fazer isso", "Não sei", "Você não está ajudando"],
          "responses": [""],
          "context": [""]
         },
