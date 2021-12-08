@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import nltk
 from nltk.stem import WordNetLemmatizer
 import pickle
@@ -5,11 +7,15 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import json
 import random
+from dialog import *
 
 
 class ChatBot:
 
-    ERROR_THRESHOLD = 0.25
+    ERROR_THRESHOLD = 0.8
+
+    MODE_NORMAL = 0
+    MODE_DIALOG = 1
 
     def __init__(self):
         self.lemmatizer = WordNetLemmatizer()
@@ -19,6 +25,15 @@ class ChatBot:
         self.intents = json.loads(open('intents.json').read())
         self.words = pickle.load(open('words.pkl', 'rb'))
         self.classes = pickle.load(open('classes.pkl', 'rb'))
+
+        self.mode = self.MODE_NORMAL
+        self.dialogs = Talk()
+        ticket_dialog = Dialog('ticket')
+        ticket_dialog.add_state('Que pena, parece que não consegui te ajudar.\nCerto, escreva com o máximo de detalhes a sua dúvida:')
+        ticket_dialog.add_state('Certo, agora informe seu nome:')
+        ticket_dialog.add_state('Agora preciso do seu e-mail:')
+        ticket_dialog.add_state('')
+        self.dialogs.add_dialog(ticket_dialog)
 
     def clean_up_sentence(self, sentence):
         sentence_words = nltk.word_tokenize(sentence)
@@ -46,18 +61,32 @@ class ChatBot:
             return_list.append({"intent": self.classes[r[0]], "probability": str(r[1])})
         return return_list
 
-    @staticmethod
-    def get_response(ints, intents_json):
+    def get_response(self, ints, intents_json, msg):
         tag = ints[0]['intent']
         list_of_intents = intents_json['intents']
         result = None
-        for i in list_of_intents:
-            if i['tag'] == tag:
-                result = random.choice(i['responses'])
-                break
+        if self.mode == self.MODE_NORMAL:
+            for i in list_of_intents:
+                if i['tag'] == tag:
+                    if tag == 'ticket':
+                        self.mode = self.MODE_DIALOG
+                        self.dialogs.set_dialog('ticket')
+                    else:
+                        result = random.choice(i['responses'])
+                    break
+        if self.mode == self.MODE_DIALOG:
+            result = self.dialogs.current_dialog.current(msg).msg
+            if self.dialogs.current_dialog.next():
+                self.mode = self.MODE_NORMAL
+                if self.dialogs.current_dialog.name == 'ticket':
+                    result += 'Sr(a) ' + \
+                              self.dialogs.current_dialog.states[1].var + \
+                              ', seu ticket foi criado com sucesso. Enviaremos um e-mail para "' + \
+                              self.dialogs.current_dialog.states[2].var + '" assim que tivermos uma resposta.'
+
         return result
 
     def chatbot_response(self, msg):
         ints = self.predict_class(msg, self.model)
-        res = self.get_response(ints, self.intents)
+        res = self.get_response(ints, self.intents, msg)
         return res

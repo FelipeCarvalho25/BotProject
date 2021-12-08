@@ -1,72 +1,42 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Hi there", "How are you", "Is anyone there?","Hey","Hola", "Hello", "Good day"],
-         "responses": ["Hello, thanks for asking", "Good to see you again", "Hi there, how can I help?"],
+         "patterns": ["Olá", "Oi", "Alguém ai?", "Opa", "Oie", "Oii", "Tudo bem?", "Como vai você?"],
+         "responses": ["Olá, como posso ajudar?"],
          "context": [""]
         },
         {"tag": "goodbye",
-         "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting to you, bye", "Till next time"],
-         "responses": ["See you!", "Have a nice day", "Bye! Come back again soon."],
+         "patterns": ["Tchau", "Até mais", "Vejo você depois"],
+         "responses": ["Até mais!", "Até outra hora.", "Tchau. :)"],
          "context": [""]
         },
         {"tag": "thanks",
-         "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
-         "responses": ["Happy to help!", "Any time!", "My pleasure"],
+         "patterns": ["Obrigado", "Agradeço", "Muito obrigado", "Perfeito, obrigado", "Obrigado pela ajuda", "Você me ajudou demais"],
+         "responses": ["Fico feliz em ajudar!", "Por dada. :)", "Imagina."],
          "context": [""]
         },
         {"tag": "noanswer",
          "patterns": [],
-         "responses": ["Sorry, can't understand you", "Please give me more info", "Not sure I understand"],
+         "responses": ["Desculpe, não entendi. Poderia reformular a frase?"],
          "context": [""]
         },
         {"tag": "options",
-         "patterns": ["How you could help me?", "What you can do?", "What help you provide?", "How you can be helpful?", "What support is offered"],
-         "responses": ["I can guide you through Adverse drug reaction list, Blood pressure tracking, Hospitals and Pharmacies", "Offering support for Adverse drug reaction, Blood pressure, Hospitals and Pharmacies"],
+         "patterns": ["Como você pode me ajudar?", "O que você pode fazer?", "O que você pode fazer por mim?", "Estou com dúvidas?", "Estou com uma dúvida", "Preciso de ajuda"],
+         "responses": ["Eu posso te ajudar com suas dúvidas sobre nossos produtos. Também posso abrir um chamado para você caso eu não consiga te ajudar."],
          "context": [""]
         },
-        {"tag": "adverse_drug",
-         "patterns": ["How to check Adverse drug reaction?", "Open adverse drugs module", "Give me a list of drugs causing adverse behavior", "List all drugs suitable for patient with adverse reaction", "Which drugs dont have adverse reaction?" ],
-         "responses": ["Navigating to Adverse drug reaction module"],
+        {"tag": "login",
+         "patterns": ["Não consigo logar", "Não consigo fazer login", "Minha senha está errada", "Estou recebendo uma mensagem de senha incorreta", "Minhas credências estão incorretas", "Não sei minha senha", "Perdi minha senha"],
+         "responses": ["Você precisa inserir seu e-mail no campo \"Login\" e sua senha no campo \"Senha\".\nCaso você tenha esquecido sua senha, basca clicar em \"Esqueci minha senha\" e informar o seu endereço de e-mail. Um e-mail será então enviado para você para que você possa escolher uma nova senha."],
          "context": [""]
         },
-        {"tag": "blood_pressure",
-         "patterns": ["Open blood pressure module", "Task related to blood pressure", "Blood pressure data entry", "I want to log blood pressure results", "Blood pressure data management" ],
-         "responses": ["Navigating to Blood Pressure module"],
+        {"tag": "ticket",
+         "patterns": ["Gostaria de abrir um ticket", "Você pode abrir um ticket", "Quero falar com um humano", "Ticket", "Abrir ticket", "Não consegui", "Não sei fazer isso", "Não sei", "Você não está ajudando"],
+         "responses": [""],
          "context": [""]
         },
-        {"tag": "blood_pressure_search",
-         "patterns": ["I want to search for blood pressure result history", "Blood pressure for patient", "Load patient blood pressure result", "Show blood pressure results for patient", "Find blood pressure results by ID" ],
-         "responses": ["Please provide Patient ID", "Patient ID?"],
-         "context": ["search_blood_pressure_by_patient_id"]
-        },
-        {"tag": "search_blood_pressure_by_patient_id",
-         "patterns": [],
-         "responses": ["Loading Blood pressure result for Patient"],
-         "context": [""]
-        },
-        {"tag": "pharmacy_search",
-         "patterns": ["Find me a pharmacy", "Find pharmacy", "List of pharmacies nearby", "Locate pharmacy", "Search pharmacy" ],
-         "responses": ["Please provide pharmacy name"],
-         "context": ["search_pharmacy_by_name"]
-        },
-        {"tag": "search_pharmacy_by_name",
-         "patterns": [],
-         "responses": ["Loading pharmacy details"],
-         "context": [""]
-        },
-        {"tag": "hospital_search",
-         "patterns": ["Lookup for hospital", "Searching for hospital to transfer patient", "I want to search hospital data", "Hospital lookup for patient", "Looking up hospital details" ],
-         "responses": ["Please provide hospital name or location"],
-         "context": ["search_hospital_by_params"]
-        },
-        {"tag": "search_hospital_by_params",
-         "patterns": [],
-         "responses": ["Please provide hospital type"],
-         "context": ["search_hospital_by_type"]
-        },
-        {"tag": "search_hospital_by_type",
-         "patterns": [],
-         "responses": ["Loading hospital details"],
+        {"tag": "energy",
+         "patterns": ["Gostaria de saber a previsão de consumo de energia.", "Energia", "Casa", "Previsão de energia"],
+         "responses": ["O consumo de energia está previsto em 1000w/h."],
          "context": [""]
         }
    ]
