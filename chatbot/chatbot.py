@@ -34,8 +34,26 @@ class ChatBot:
         ticket_dialog.add_state('Agora preciso do seu e-mail:')
         ticket_dialog.add_state('Agora informe seu problema ou solicitação:')
         ticket_dialog.add_state('')
+        register_dialog = Dialog('register')
+        register_dialog.add_state('Certo, qual dado você gostaria de mudar?')
+        register_dialog.add_state('Qual o valor você quer atribuir a este dado?')
+        register_dialog.add_state('')
+        blackout_dialog = Dialog('blackout')
+        blackout_dialog.add_state('Certo, agora informe seu nome:')
+        blackout_dialog.add_state('Qual o endereço onde ocorreu a queda de energia?')
+        blackout_dialog.add_state('Qual o horário que ocorreu a queda de energia?')
+        blackout_dialog.add_state('Informe um e-mail para contato:')
+        blackout_dialog.add_state('')
+        religate_dialog = Dialog('religate')
+        religate_dialog.add_state('Certo, informe seu nome:')
+        religate_dialog.add_state('Qual o endereço em que deseja religar?')
+        religate_dialog.add_state('Informe um horário de preferência para visita técnica:')
+        religate_dialog.add_state('Informe um e-mail para contato:')
+        religate_dialog.add_state('')
         self.dialogs.add_dialog(ticket_dialog)
-
+        self.dialogs.add_dialog(register_dialog)
+        self.dialogs.add_dialog(blackout_dialog)
+        self.dialogs.add_dialog(religate_dialog)
     def clean_up_sentence(self, sentence):
         sentence_words = nltk.word_tokenize(sentence)
         sentence_words = [self.lemmatizer.lemmatize(word.lower()) for word in sentence_words]
@@ -69,9 +87,9 @@ class ChatBot:
         if self.mode == self.MODE_NORMAL:
             for i in list_of_intents:
                 if i['tag'] == tag:
-                    if tag == 'ticket':
+                    if tag in ('ticket', 'register', 'blackout', 'religate'):
                         self.mode = self.MODE_DIALOG
-                        self.dialogs.set_dialog('ticket')
+                        self.dialogs.set_dialog(tag)
                     else:
                         result = random.choice(i['responses'])
                     break
@@ -84,7 +102,21 @@ class ChatBot:
                               self.dialogs.current_dialog.states[1].var + \
                               ', seu ticket foi criado com sucesso. Enviaremos um e-mail para "' + \
                               self.dialogs.current_dialog.states[2].var + '" assim que tivermos uma resposta.'
-
+                elif self.dialogs.current_dialog.name == 'register':
+                    result += 'Certo, o dado ' + \
+                              self.dialogs.current_dialog.states[0].var + \
+                              'foi atualizado para "' + \
+                              self.dialogs.current_dialog.states[1].var + '" .'
+                elif self.dialogs.current_dialog.name == 'blackout':
+                    result += 'Sr(a) ' + \
+                              self.dialogs.current_dialog.states[0].var + \
+                              ', seu incidente foi cadastrado, nossa equipe estará trabalhando para reestabelecer a energia e avisaremos no e-mail"' + \
+                              self.dialogs.current_dialog.states[3].var + '" assim que tivermos uma resposta.'
+                elif self.dialogs.current_dialog.name == 'religate':
+                    result += 'Sr(a) ' + \
+                              self.dialogs.current_dialog.states[0].var + \
+                              ', sua solicitação foi adicionada, estaremos agendando uma visita técnica e avisaremos no e-mail"' + \
+                              self.dialogs.current_dialog.states[3].var + '" assim que tivermos uma resposta.'
         return result
 
     def chatbot_response(self, msg):
