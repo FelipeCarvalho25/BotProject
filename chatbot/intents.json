@@ -59,6 +59,11 @@
          "responses": [""],
          "context": [""]
         },
+        {"tag": "who",
+         "patterns": ["Quem é você?", "Qual seu nome?", "Quem ser você?", "Você é humano?", "Você é de verdade?", "Você é de onde?", "Onde mora?", "O que é você?", "Você é quem?", "O que você é?"],
+         "responses": ["Eu sou o ThunderBot, trocadilho para ThunderBolt (risos), sou um bot de atendimento de uma empresa de energia criado para atender solicitações, requisições e report de problemas. Será um prazer ajudá-lo!"],
+         "context": [""]
+        },
         {"tag": "energy",
          "patterns": ["Gostaria de saber a previsão de consumo de energia.", "Energia", "Casa", "Previsão de energia", "Consumo", "Consumo de energia", "Previsão de consumo"],
          "responses": [""],
