@@ -9,7 +9,6 @@ import json
 import random
 import requests
 from datetime import datetime
-import ast
 from dialog import *
 
 

@@ -14,7 +14,7 @@ class App(tk.Frame):
         master.resizable(width=tk.FALSE, height=tk.FALSE)
 
         # janela de log
-        self.chat_log = tk.Text(master, bd=0, bg="white", height="8", width="50", font="Arial", )
+        self.chat_log = tk.Text(master, bd=0, bg="white", height="8", width=50, font="Arial", )
         self.chat_log.config(state=tk.DISABLED)
 
         # barra de rolagem
@@ -27,7 +27,7 @@ class App(tk.Frame):
         master.bind('<Return>', self._send)
 
         # entrada de texto
-        self.entry_box = tk.Text(master, bd=0, bg="white", width="29", height="5", font="Arial")
+        self.entry_box = tk.Text(master, bd=0, bg="white", width=29, height="5", font="Arial")
 
         # posiciona os componentes
         self.chat_log.place(x=5, y=5, height=395, width=780)
