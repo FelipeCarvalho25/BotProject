@@ -28,6 +28,7 @@ class Dialog:
     def next(self):
         self.cur += 1
         if self.cur >= self.max:
+            self.restart()
             return True
         return False
 

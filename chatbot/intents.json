@@ -25,8 +25,8 @@
          "context": [""]
         },
         {"tag": "options",
-         "patterns": ["Gostaria de uma informação", "Como você pode me ajudar?", "O que você pode fazer?", "O que você pode fazer por mim?", "Estou com dúvidas?", "Estou com uma dúvida", "Preciso de ajuda"],
-         "responses": ["Eu posso te ajudar com suas dúvidas sobre nossos produtos.\nTambém posso abrir um chamado para você caso eu não consiga te ajudar.\nPara facilitar, essa é a lista das coisas que eu posso fazer:\n• Atualizar dados cadastrais\n• Como faço login?\n• Como encontro meu consumo de energia?\n• Onde pago minha conta?\n• Minha energia caiu!\n• Religamento de enegia.\n• Previsão de consumo de energia."],
+         "patterns": ["Opções", "Gostaria de uma informação", "Como você pode me ajudar?", "O que você pode fazer?", "O que você pode fazer por mim?", "Estou com dúvidas?", "Estou com uma dúvida", "Preciso de ajuda"],
+         "responses": ["Eu posso te ajudar com suas dúvidas sobre nossos produtos.\nTambém posso abrir um chamado para você caso eu não consiga te ajudar.\nPara facilitar, essa é a lista das coisas que eu posso fazer:\n\n• Atualizar dados cadastrais\n• Como faço login?\n• Como encontro meu consumo de energia?\n• Onde pago minha conta?\n• Minha energia caiu!\n• Religamento de enegia.\n• Previsão de consumo de energia."],
          "context": [""]
         },
         {"tag": "login",
@@ -50,12 +50,12 @@
          "context": [""]
         },
         {"tag": "blackout",
-         "patterns": ["Quero relatar uma queda de energia","Minha energia caiu, o que faço?", "Minha energia caiu", "Queda de energia", "Luz caiu", "Energia acabou", "Energia acabou", "Falta de energia", "Falta da luz", "Blackout"],
+         "patterns": ["Quero relatar uma queda de energia","Minha energia caiu, o que faço?", "Minha energia caiu", "Queda de energia", "Luz caiu", "Energia acabou", "Falta de energia", "Falta da luz", "Blackout"],
          "responses": [""],
          "context": [""]
         },
         {"tag": "turnbackon",
-         "patterns": ["Como religar uma unidade consumidora?", "Gostaria de religar minha energia", "Religar unidade", "Religar unidade consumidora", "Religar energia", "Ligar novamente a energia", "Ligar novamente a unidade consumidora"],
+         "patterns": ["Como religar uma unidade consumidora?", "Religar", "Gostaria de religar minha energia", "Religar unidade", "Religar unidade consumidora", "Religar energia", "Ligar novamente a energia", "Ligar novamente a unidade consumidora"],
          "responses": [""],
          "context": [""]
         },
