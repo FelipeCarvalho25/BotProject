@@ -34,11 +34,11 @@ class ChatBot:
         self.dialogs = Talk()
         # abrir ticket
         ticket_dialog = Dialog('ticket')
-        ##ticket_dialog.add_state('Que pena, parece que não consegui te ajudar. Vou abrir um ticket para você.\n\n'
-        ##                        'Certo, escreva com o máximo de detalhes a sua dúvida:') comentado pois estava causando confusão no dialogo
-        ticket_dialog.add_state('Certo, agora informe seu nome:')
-        ticket_dialog.add_state('Agora informe seu problema:')
-        ticket_dialog.add_state('Preciso do seu e-mail:')
+        ticket_dialog.add_state('Que pena, parece que não consegui te ajudar. Vou abrir um ticket para você.\n\n'
+                                'Certo, escreva com o máximo de detalhes a sua dúvida:')
+        ticket_dialog.add_state('Qual o seu nome?')
+        ticket_dialog.add_state('Qual a sua unidade consumidora?')
+        ticket_dialog.add_state('Agora preciso do seu e-mail:')
         ticket_dialog.add_state('')
         # alteração de dados cadastrais
         register_dialog = Dialog('register')
@@ -48,21 +48,21 @@ class ChatBot:
         # informar queda de luz
         blackout_dialog = Dialog('blackout')
         blackout_dialog.add_state('Certo, agora informe seu nome:')
-        blackout_dialog.add_state('Qual o endereço onde ocorreu a queda de energia?')
+        blackout_dialog.add_state('Qual a unidade consumidora?')
         blackout_dialog.add_state('Qual o horário que ocorreu a queda de energia?')
         blackout_dialog.add_state('Informe um e-mail para contato:')
         blackout_dialog.add_state('')
         # religamento de energia
-        religate_dialog = Dialog('turnbackon')
-        religate_dialog.add_state('Certo, informe seu nome:')
-        religate_dialog.add_state('Qual o endereço em que deseja religar?')
-        religate_dialog.add_state('Informe um horário de preferência para visita técnica:')
-        religate_dialog.add_state('Informe um e-mail para contato:')
-        religate_dialog.add_state('')
+        turnbackon_dialog = Dialog('turnbackon')
+        turnbackon_dialog.add_state('Certo, informe seu nome:')
+        turnbackon_dialog.add_state('Qual a unidade consumidora em que deseja religar?')
+        turnbackon_dialog.add_state('Informe um horário de preferência para visita técnica:')
+        turnbackon_dialog.add_state('Informe um e-mail para contato:')
+        turnbackon_dialog.add_state('')
         self.dialogs.add_dialog(ticket_dialog)
         self.dialogs.add_dialog(register_dialog)
         self.dialogs.add_dialog(blackout_dialog)
-        self.dialogs.add_dialog(religate_dialog)
+        self.dialogs.add_dialog(turnbackon_dialog)
 
     def clean_up_sentence(self, sentence):
         sentence_words = nltk.word_tokenize(sentence)
@@ -147,7 +147,7 @@ class ChatBot:
                 self.mode = self.MODE_NORMAL
                 if self.dialogs.current_dialog.name == 'ticket':
                     result += 'Sr(a) ' + \
-                              self.dialogs.current_dialog.states[0].var + \
+                              self.dialogs.current_dialog.states[1].var + \
                               ', seu ticket foi criado com sucesso.\nEnviaremos um e-mail para "' + \
                               self.dialogs.current_dialog.states[2].var + '" assim que tivermos uma resposta.'
                 elif self.dialogs.current_dialog.name == 'register':
