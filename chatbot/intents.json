@@ -1,11 +1,16 @@
 {"intents": [
         {"tag": "greeting",
          "patterns": ["Olá", "Oi", "Alguém ai?", "Opa", "Oie", "Oii", "Tudo bem?", "Como vai você?", "Boa noite", "Bom dia", "Boa tarde", "E ai"],
-         "responses": ["Olá, como posso ajudar?"],
+         "responses": ["Olá. Como posso ajudar?"],
+         "context": [""]
+        },
+        {"tag": "good_greeting",
+         "patterns": ["Tudo bem?", "Como vai você?", "Olá, Tudo bem?", "Oi, Como vai você?"],
+         "responses": ["Vou bem, obrigado. Como posso ajudar?"],
          "context": [""]
         },
         {"tag": "register",
-         "patterns": ["Atualização Cadastral", "Gostaria de atualizar meus dados", "Quero atualizar meu cadastro", "Atualizar meu cadastro", "Alterar meus dados", "Alterar meu cadastro"],
+         "patterns": ["Atualização Cadastral", "Gostaria de atualizar meus dados", "Atualizar dados", "Quero atualizar meu cadastro", "Atualizar meu cadastro", "Alterar meus dados", "Alterar meu cadastro"],
          "responses": [""],
          "context": [""]
         },
@@ -19,19 +24,14 @@
          "responses": ["Fico feliz em ajudar!", "Por dada. :)", "Imagina."],
          "context": [""]
         },
-        {"tag": "noanswer",
-         "patterns": [],
-         "responses": ["Desculpe, não entendi. Poderia reformular a frase?"],
-         "context": [""]
-        },
         {"tag": "options",
-         "patterns": ["Como você pode me ajudar?", "O que você pode fazer?", "O que você pode fazer por mim?", "Estou com dúvidas?", "Estou com uma dúvida", "Preciso de ajuda"],
-         "responses": ["Eu posso te ajudar com suas dúvidas sobre nossos produtos. Também posso abrir um chamado para você caso eu não consiga te ajudar."],
+         "patterns": ["Gostaria de uma informação", "Como você pode me ajudar?", "O que você pode fazer?", "O que você pode fazer por mim?", "Estou com dúvidas?", "Estou com uma dúvida", "Preciso de ajuda"],
+         "responses": ["Eu posso te ajudar com suas dúvidas sobre nossos produtos.\nTambém posso abrir um chamado para você caso eu não consiga te ajudar.\nPara facilitar, essa é a lista das coisas que eu posso fazer:\n• Atualizar dados cadastrais\n• Como faço login?\n• Como encontro meu consumo de energia?\n• Onde pago minha conta?\n• Minha energia caiu!\n• Religamento de enegia.\n• Previsão de consumo de energia."],
          "context": [""]
         },
         {"tag": "login",
-         "patterns": ["Não consigo logar", "Não consigo fazer login", "Minha senha está errada", "Estou recebendo uma mensagem de senha incorreta", "Minhas credências estão incorretas", "Não sei minha senha", "Perdi minha senha"],
-         "responses": ["Você precisa inserir seu e-mail no campo \"Login\" e sua senha no campo \"Senha\".\nCaso você tenha esquecido sua senha, basca clicar em \"Esqueci minha senha\" e informar o seu endereço de e-mail. Um e-mail será então enviado para você para que você possa escolher uma nova senha."],
+         "patterns": ["Login", "Minha senha está errada", "Estou recebendo uma mensagem de senha incorreta", "Minhas credências estão incorretas", "Não sei minha senha", "Perdi minha senha"],
+         "responses": ["Para fazer login voce deve acessar energias.com/login e inserir seu e-mail e senha.\nCaso você tenha esquecido sua senha, basca clicar em \"Esqueci minha senha\" e informar o seu endereço de e-mail. Um e-mail de recuperação será enviado para você."],
          "context": [""]
         },
         {"tag": "ticket",
@@ -44,7 +44,7 @@
          "responses": ["Seu consumo foi de 900 kWh em 6 meses, com média de 150 kWh/mês."],
          "context": [""]
         },
-        {"tag": "vias",
+        {"tag": "bill",
          "patterns": ["Gostaria de tirar a segunda via da fatura", "Como tirar a segunda via da fatura?", "Preciso da segunda via da fatura", "Tirar segunda via", "Segunda via", "Onde pagar a fatura?", "Como pagar a fatura?", "Como funciona o pagamento de fatura?"],
          "responses": ["Para tirar a segunda via é preciso acessar nosso site e selecionar a segunda via, informando seu endereço e CPF do titular. As faturas podem ser pagas em qualquer banco até a data de vencimento."],
          "context": [""]
@@ -54,14 +54,14 @@
          "responses": [""],
          "context": [""]
         },
-        {"tag": "religate",
+        {"tag": "turnbackon",
          "patterns": ["Como religar uma unidade consumidora?", "Gostaria de religar minha energia", "Religar unidade", "Religar unidade consumidora", "Religar energia", "Ligar novamente a energia", "Ligar novamente a unidade consumidora"],
          "responses": [""],
          "context": [""]
         },
         {"tag": "energy",
-         "patterns": ["Gostaria de saber a previsão de consumo de energia.", "Energia", "Casa", "Previsão de energia"],
-         "responses": ["O consumo de energia está previsto em 1000w/h."],
+         "patterns": ["Gostaria de saber a previsão de consumo de energia.", "Energia", "Casa", "Previsão de energia", "Consumo", "Consumo de energia", "Previsão de consumo"],
+         "responses": [""],
          "context": [""]
         }
    ]

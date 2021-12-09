@@ -7,12 +7,14 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import json
 import random
+import requests
+from datetime import datetime
+import ast
 from dialog import *
 
 
 class ChatBot:
-
-    ERROR_THRESHOLD = 0.8
+    ERROR_THRESHOLD = 0.80
 
     MODE_NORMAL = 0
     MODE_DIALOG = 1
@@ -22,28 +24,35 @@ class ChatBot:
 
         self.model = load_model('chatbot_model.h5')
 
-        self.intents = json.loads(open('intents.json').read())
+        self.intents = json.loads(open('intents.json', encoding='utf-8').read())
         self.words = pickle.load(open('words.pkl', 'rb'))
         self.classes = pickle.load(open('classes.pkl', 'rb'))
 
+        self.noanswers = 0
+
+        # diálogos
         self.mode = self.MODE_NORMAL
         self.dialogs = Talk()
+        # abrir ticket
         ticket_dialog = Dialog('ticket')
-        ticket_dialog.add_state('Que pena, parece que não consegui te ajudar.\nCerto, escreva com o máximo de detalhes a sua dúvida:')
+        ticket_dialog.add_state(
+            'Que pena, parece que não consegui te ajudar.\nCerto, escreva com o máximo de detalhes a sua dúvida:')
         ticket_dialog.add_state('Certo, agora informe seu nome:')
         ticket_dialog.add_state('Agora preciso do seu e-mail:')
-        ticket_dialog.add_state('Agora informe seu problema ou solicitação:')
         ticket_dialog.add_state('')
+        # alteração de dados cadastrais
         register_dialog = Dialog('register')
         register_dialog.add_state('Certo, qual dado você gostaria de mudar?')
         register_dialog.add_state('Qual o valor você quer atribuir a este dado?')
         register_dialog.add_state('')
+        # informar queda de luz
         blackout_dialog = Dialog('blackout')
         blackout_dialog.add_state('Certo, agora informe seu nome:')
         blackout_dialog.add_state('Qual o endereço onde ocorreu a queda de energia?')
         blackout_dialog.add_state('Qual o horário que ocorreu a queda de energia?')
         blackout_dialog.add_state('Informe um e-mail para contato:')
         blackout_dialog.add_state('')
+        # religamento de energia
         religate_dialog = Dialog('religate')
         religate_dialog.add_state('Certo, informe seu nome:')
         religate_dialog.add_state('Qual o endereço em que deseja religar?')
@@ -54,6 +63,7 @@ class ChatBot:
         self.dialogs.add_dialog(register_dialog)
         self.dialogs.add_dialog(blackout_dialog)
         self.dialogs.add_dialog(religate_dialog)
+
     def clean_up_sentence(self, sentence):
         sentence_words = nltk.word_tokenize(sentence)
         sentence_words = [self.lemmatizer.lemmatize(word.lower()) for word in sentence_words]
@@ -73,6 +83,8 @@ class ChatBot:
     def predict_class(self, sentence, model):
         p = self.bow(sentence, self.words, show_details=False)
         res = model.predict(np.array([p]))[0]
+        # np.set_printoptions(suppress=True)
+        # print(res)
         results = [[i, r] for i, r in enumerate(res) if r > self.ERROR_THRESHOLD]
         results.sort(key=lambda x: x[1], reverse=True)
         return_list = []
@@ -81,18 +93,52 @@ class ChatBot:
         return return_list
 
     def get_response(self, ints, intents_json, msg):
-        tag = ints[0]['intent']
-        list_of_intents = intents_json['intents']
         result = None
+        if len(ints) == 0 and self.mode == self.MODE_NORMAL:
+            self.noanswers += 1
+            if self.noanswers >= 3:
+                self.mode = self.MODE_DIALOG
+                self.dialogs.set_dialog('ticket')
+            else:
+                result = 'Desculpe, não entendi. Poderia reformular a frase?'
+                return result
+        tag = ''
+        if len(ints) > 0:
+            tag = ints[0]['intent']
+        list_of_intents = intents_json['intents']
+
         if self.mode == self.MODE_NORMAL:
             for i in list_of_intents:
                 if i['tag'] == tag:
-                    if tag in ('ticket', 'register', 'blackout', 'religate'):
+                    if tag in ('ticket', 'register', 'blackout', 'turnbackon'):
                         self.mode = self.MODE_DIALOG
                         self.dialogs.set_dialog(tag)
+                    elif tag == 'energy':
+                        url = 'http://18.222.64.182:5000/previsao'
+                        headers = {'Content-Type': 'application/json'}
+                        hour = datetime.now().hour
+                        data = json.dumps({'data': datetime.today().strftime('%d/%m/%Y'),
+                                           'Hour': hour,
+                                           'Press_mm_hg': random.randrange(720, 781),
+                                           'T3': random.randrange(17, 31),
+                                           'RH_3': random.randrange(28, 52)})
+                        try:
+                            response = requests.post(url=url, data=data, headers=headers)
+                            if response.status_code == 200:
+                                cons = response.text
+                                cons = cons[2: 8]
+                                result = 'A previsão de consumo de energia para as ' + str(hour) + ' horas é de ' + \
+                                         str(cons) + 'kWh.'
+                            else:
+                                result = 'Parece que meus servidores estão fora do ar...\n' \
+                                         'Gostaria de perguntar outra coisa?'
+                        except:
+                            result = 'Parece que meus servidores estão fora do ar...\n' \
+                                     'Gostaria de perguntar outra coisa?'
                     else:
                         result = random.choice(i['responses'])
                     break
+
         if self.mode == self.MODE_DIALOG:
             result = self.dialogs.current_dialog.current(msg).msg
             if self.dialogs.current_dialog.next():
@@ -110,13 +156,15 @@ class ChatBot:
                 elif self.dialogs.current_dialog.name == 'blackout':
                     result += 'Sr(a) ' + \
                               self.dialogs.current_dialog.states[0].var + \
-                              ', seu incidente foi cadastrado, nossa equipe estará trabalhando para reestabelecer a energia e avisaremos no e-mail"' + \
+                              ', seu incidente foi cadastrado, nossa equipe estará trabalhando para reestabelecer ' \
+                              'a energia e avisaremos no e-mail"' + \
                               self.dialogs.current_dialog.states[3].var + '" assim que tivermos uma resposta.'
                 elif self.dialogs.current_dialog.name == 'religate':
                     result += 'Sr(a) ' + \
                               self.dialogs.current_dialog.states[0].var + \
-                              ', sua solicitação foi adicionada, estaremos agendando uma visita técnica e avisaremos no e-mail"' + \
-                              self.dialogs.current_dialog.states[3].var + '" assim que tivermos uma resposta.'
+                              ', sua solicitação foi adicionada, estaremos agendando uma visita técnica e avisaremos ' \
+                              'no e-mail"' + self.dialogs.current_dialog.states[3].var + \
+                              '" assim que tivermos uma resposta.'
         return result
 
     def chatbot_response(self, msg):

@@ -44,7 +44,7 @@ class App(tk.Frame):
 
         if msg != '':
             self.chat_log.config(state=tk.NORMAL)
-            self.chat_log.insert(tk.END, "You: " + msg + '\n\n')
+            self.chat_log.insert(tk.END, "Você: " + msg + '\n\n')
             self.chat_log.config(foreground="#442265", font=("Verdana", 12))
 
             res = self.chatbot.chatbot_response(msg)
