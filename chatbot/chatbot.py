@@ -34,8 +34,8 @@ class ChatBot:
         self.dialogs = Talk()
         # abrir ticket
         ticket_dialog = Dialog('ticket')
-        ticket_dialog.add_state('Que pena, parece que não consegui te ajudar. Vou abrir um ticket para você.\n\n'
-                                'Certo, escreva com o máximo de detalhes a sua dúvida:')
+        ticket_dialog.add_state('Vou abrir um ticket para você.\n\n'
+                          'Certo, escreva com o máximo de detalhes seu problema:')
         ticket_dialog.add_state('Qual o seu nome?')
         ticket_dialog.add_state('Qual a sua unidade consumidora?')
         ticket_dialog.add_state('Agora preciso do seu e-mail:')
@@ -149,7 +149,7 @@ class ChatBot:
                     result += 'Sr(a) ' + \
                               self.dialogs.current_dialog.states[1].var + \
                               ', seu ticket foi criado com sucesso.\nEnviaremos um e-mail para "' + \
-                              self.dialogs.current_dialog.states[2].var + '" assim que tivermos uma resposta.'
+                              self.dialogs.current_dialog.states[3].var + '" assim que tivermos uma resposta.'
                 elif self.dialogs.current_dialog.name == 'register':
                     result += 'Certo, o dado ' + \
                               self.dialogs.current_dialog.states[0].var + \
