@@ -1,11 +1,11 @@
 {"intents": [
         {"tag": "greeting",
-         "patterns": ["Olá", "Oi", "Alguém ai?", "Opa", "Oie", "Oii", "Tudo bem?", "Como vai você?", "Boa noite", "Bom dia", "Boa tarde", "E ai"],
+         "patterns": ["Olá", "Oi", "Alguém ai?", "Opa", "Oie", "Oii", "Boa noite", "Bom dia", "Boa tarde", "E ai"],
          "responses": ["Olá. Como posso ajudar?"],
          "context": [""]
         },
         {"tag": "good_greeting",
-         "patterns": ["Tudo bem?", "Como vai você?", "Olá, Tudo bem?", "Oi, Como vai você?"],
+         "patterns": ["Tudo bem?", "Como vai você?", "Olá, Tudo bem?", "Oi, Como vai você?", "Como você está?", "Oi, como você está?", "Oi, tudo bem?", "Olá, como vai você?"],
          "responses": ["Vou bem, obrigado. Como posso ajudar?"],
          "context": [""]
         },
@@ -61,7 +61,7 @@
         },
         {"tag": "who",
          "patterns": ["Quem é você?", "Qual seu nome?", "Quem ser você?", "Você é humano?", "Você é de verdade?", "Você é de onde?", "Onde mora?", "O que é você?", "Você é quem?", "O que você é?"],
-         "responses": ["Eu sou o ThunderBot, trocadilho para ThunderBolt (risos), sou um bot de atendimento de uma empresa de energia criado para atender solicitações, requisições e report de problemas. Será um prazer ajudá-lo!"],
+         "responses": ["Eu sou o ThunderBot, trocadilho para ThunderBolt (risos).\nSou um bot de atendimento da Energias criado para atendimento e suporte ao cliente.\nSerá um prazer ajudá-lo!"],
          "context": [""]
         },
         {"tag": "energy",
