@@ -39,11 +39,11 @@ words = sorted(list(set(words)))
 
 classes = sorted(list(set(classes)))
 
-print(len(documents), "documentos")
+print(len(documents), 'documentos')
 
-print(len(classes), "classes", classes)
+print(len(classes), 'classes', classes)
 
-print(len(words), "palavras únicas lemmatizadas", words)
+print(len(words), 'palavras únicas lemmatizadas', words)
 
 pickle.dump(words, open('words.pkl', 'wb'))
 pickle.dump(classes, open('classes.pkl', 'wb'))
@@ -72,7 +72,7 @@ training = np.array(training)
 # cria os dados de treinamento
 train_x = list(training[:, 0])
 train_y = list(training[:, 1])
-print("dados de treinamento criados")
+print('dados de treinamento criados')
 
 # craindo modelo
 model = Sequential()
@@ -92,4 +92,4 @@ model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=50, batch_size=5, verbose=1)
 model.save('chatbot_model.h5', hist)
 
-print("modelo criado")
+print('modelo criado')

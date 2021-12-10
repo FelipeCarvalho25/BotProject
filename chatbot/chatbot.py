@@ -77,7 +77,7 @@ class ChatBot:
                 if w == s:
                     bag[i] = 1
                     if show_details:
-                        print("found in bag: %s" % w)
+                        print('found in bag: %s' % w)
         return np.array(bag)
 
     def predict_class(self, sentence, model):
@@ -89,7 +89,7 @@ class ChatBot:
         results.sort(key=lambda x: x[1], reverse=True)
         return_list = []
         for r in results:
-            return_list.append({"intent": self.classes[r[0]], "probability": str(r[1])})
+            return_list.append({'intent': self.classes[r[0]], 'probability': str(r[1])})
         return return_list
 
     def get_response(self, ints, intents_json, msg):
@@ -148,25 +148,25 @@ class ChatBot:
                 if self.dialogs.current_dialog.name == 'ticket':
                     result += 'Sr(a) ' + \
                               self.dialogs.current_dialog.states[1].var + \
-                              ', seu ticket foi criado com sucesso.\nEnviaremos um e-mail para "' + \
-                              self.dialogs.current_dialog.states[3].var + '" assim que tivermos uma resposta.'
+                              ', seu ticket foi criado com sucesso.\nEnviaremos um e-mail para '' + \
+                              self.dialogs.current_dialog.states[3].var + '' assim que tivermos uma resposta.'
                 elif self.dialogs.current_dialog.name == 'register':
                     result += 'Certo, o dado ' + \
                               self.dialogs.current_dialog.states[0].var + \
-                              ' foi atualizado para "' + \
-                              self.dialogs.current_dialog.states[1].var + '" .'
+                              ' foi atualizado para '' + \
+                              self.dialogs.current_dialog.states[1].var + '' .'
                 elif self.dialogs.current_dialog.name == 'blackout':
                     result += 'Sr(a) ' + \
                               self.dialogs.current_dialog.states[0].var + \
                               ', seu incidente foi cadastrado, nossa equipe estará trabalhando para reestabelecer ' \
-                              'a energia e avisaremos no e-mail"' + \
-                              self.dialogs.current_dialog.states[3].var + '" assim que tivermos uma resposta.'
+                              'a energia e avisaremos no e-mail'' + \
+                              self.dialogs.current_dialog.states[3].var + '' assim que tivermos uma resposta.'
                 elif self.dialogs.current_dialog.name == 'turnbackon':
                     result += 'Sr(a) ' + \
                               self.dialogs.current_dialog.states[0].var + \
                               ', sua solicitação foi adicionada, estaremos agendando uma visita técnica e avisaremos ' \
-                              'no e-mail"' + self.dialogs.current_dialog.states[3].var + \
-                              '" assim que tivermos uma resposta.'
+                              'no e-mail'' + self.dialogs.current_dialog.states[3].var + \
+                              '' assim que tivermos uma resposta.'
         return result
 
     def chatbot_response(self, msg):
